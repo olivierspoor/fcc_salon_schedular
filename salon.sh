@@ -11,6 +11,29 @@ MAIN_MENU() {
 
   echo $SERVICES | sed -E 's/([0-9])/\n\1/g;s/ \|/)/g'
 
+  read SERVICE_SELECTION
+
+  case $SERVICE_SELECTION in
+  1) TRIM_SELECTED ;;
+  2) CUT_SELECTED ;;
+  3) STYLE_SELECTED ;;
+  4) COLOR_SELECTED ;;
+  *) MAIN_MENU ;; 
+  esac
+
+}
+
+TRIM_SELECTED() {
+  echo "Option $SERVICE_SELECTION selected."
+}
+CUT_SELECTED() {
+  echo "Option $SERVICE_SELECTION selected."
+}
+STYLE_SELECTED() {
+  echo "Option $SERVICE_SELECTION selected."
+}
+COLOR_SELECTED() {
+  echo "Option $SERVICE_SELECTION selected."
 }
 
 MAIN_MENU
