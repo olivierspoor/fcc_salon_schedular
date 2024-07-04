@@ -5,11 +5,18 @@ PSQL="psql -X --username=freecodecamp --dbname=salon --tuples-only -c"
 echo -e "\n~~~~~ Salon Appointment Scheduler ~~~~~\n"
 
 MAIN_MENU() {
+
+  if [[ $1 ]]
+    then
+    echo -e "\n$1"
+  fi
+
   echo -e "How may I help you?\n"
 
   SERVICES=$($PSQL "SELECT service_id, name FROM services ORDER BY service_id")
 
   echo $SERVICES | sed -E 's/([0-9])/\n\1/g;s/ \|/)/g'
+  echo "x) Exit"
 
   read SERVICE_SELECTION
 
@@ -18,7 +25,8 @@ MAIN_MENU() {
   2) CUT_SELECTED ;;
   3) STYLE_SELECTED ;;
   4) COLOR_SELECTED ;;
-  *) MAIN_MENU ;; 
+  x) EXIT ;;
+  *) MAIN_MENU "Please enter a valid option" ;; 
   esac
 
 }
@@ -34,6 +42,9 @@ STYLE_SELECTED() {
 }
 COLOR_SELECTED() {
   echo "Option $SERVICE_SELECTION selected."
+}
+EXIT() {
+  echo "Thank you. Goodbye"
 }
 
 MAIN_MENU
