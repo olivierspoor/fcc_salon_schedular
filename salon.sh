@@ -18,31 +18,23 @@ MAIN_MENU() {
   echo $SERVICES | sed -E 's/([0-9])/\n\1/g;s/ \|/)/g'
   echo "x) Exit"
 
-  read SERVICE_SELECTION
+  read SERVICE_ID_SELECTED
 
-  case $SERVICE_SELECTION in
-  1) TRIM_SELECTED ;;
-  2) CUT_SELECTED ;;
-  3) STYLE_SELECTED ;;
-  4) COLOR_SELECTED ;;
-  x) EXIT ;;
-  *) MAIN_MENU "Please enter a valid option" ;; 
-  esac
-
+  if [[ $SERVICE_ID_SELECTED = x ]]
+    then 
+      EXIT
+    elif [[ $SERVICE_ID_SELECTED != [1-4] ]] 
+    then
+      MAIN_MENU "Please enter a valid option"
+    else
+      ITEM_SELECTED
+  fi
 }
 
-TRIM_SELECTED() {
-  echo "Option $SERVICE_SELECTION selected."
+ITEM_SELECTED() {
+  echo "Option $SERVICE_ID_SELECTED selected."
 }
-CUT_SELECTED() {
-  echo "Option $SERVICE_SELECTION selected."
-}
-STYLE_SELECTED() {
-  echo "Option $SERVICE_SELECTION selected."
-}
-COLOR_SELECTED() {
-  echo "Option $SERVICE_SELECTION selected."
-}
+
 EXIT() {
   echo "Thank you. Goodbye"
 }
